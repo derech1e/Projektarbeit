@@ -33,6 +33,11 @@ namespace MarioKartRechner
         }
 
         //Schaltflächemethoden
+        private void btnBeenden_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void btnSpiel_1_Click(object sender, EventArgs e)
         {
             spielerZuSpiel(listBoxSpiel_1);

@@ -79,6 +79,7 @@
             this.lblFinale = new System.Windows.Forms.Label();
             this.listBoxFinalesSpiel = new System.Windows.Forms.ListBox();
             this.btnGewinner = new System.Windows.Forms.Button();
+            this.btnBeenden = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxSchueler
@@ -115,7 +116,7 @@
             this.listBoxSchueler.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxSchueler.Name = "listBoxSchueler";
             this.listBoxSchueler.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxSchueler.Size = new System.Drawing.Size(194, 652);
+            this.listBoxSchueler.Size = new System.Drawing.Size(194, 472);
             this.listBoxSchueler.TabIndex = 0;
             // 
             // lblSchueler
@@ -371,9 +372,9 @@
             // btnZuruecksetzen
             // 
             this.btnZuruecksetzen.ForeColor = System.Drawing.Color.Red;
-            this.btnZuruecksetzen.Location = new System.Drawing.Point(217, 650);
+            this.btnZuruecksetzen.Location = new System.Drawing.Point(13, 559);
             this.btnZuruecksetzen.Name = "btnZuruecksetzen";
-            this.btnZuruecksetzen.Size = new System.Drawing.Size(110, 37);
+            this.btnZuruecksetzen.Size = new System.Drawing.Size(194, 37);
             this.btnZuruecksetzen.TabIndex = 28;
             this.btnZuruecksetzen.Text = "Zurücksetzen";
             this.btnZuruecksetzen.UseVisualStyleBackColor = true;
@@ -381,9 +382,9 @@
             // 
             // btnZufall
             // 
-            this.btnZufall.Location = new System.Drawing.Point(217, 602);
+            this.btnZufall.Location = new System.Drawing.Point(13, 511);
             this.btnZufall.Name = "btnZufall";
-            this.btnZufall.Size = new System.Drawing.Size(110, 42);
+            this.btnZufall.Size = new System.Drawing.Size(194, 42);
             this.btnZufall.TabIndex = 29;
             this.btnZufall.Text = "Zufällig";
             this.btnZufall.UseVisualStyleBackColor = true;
@@ -601,11 +602,22 @@
             this.btnGewinner.UseVisualStyleBackColor = true;
             this.btnGewinner.Click += new System.EventHandler(this.btnGewinner_Click);
             // 
+            // btnBeenden
+            // 
+            this.btnBeenden.Location = new System.Drawing.Point(13, 602);
+            this.btnBeenden.Name = "btnBeenden";
+            this.btnBeenden.Size = new System.Drawing.Size(194, 42);
+            this.btnBeenden.TabIndex = 55;
+            this.btnBeenden.Text = "Beenden";
+            this.btnBeenden.UseVisualStyleBackColor = true;
+            this.btnBeenden.Click += new System.EventHandler(this.btnBeenden_Click);
+            // 
             // FrmHaupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2168, 938);
+            this.ClientSize = new System.Drawing.Size(2077, 938);
+            this.Controls.Add(this.btnBeenden);
             this.Controls.Add(this.btnGewinner);
             this.Controls.Add(this.btnFinale);
             this.Controls.Add(this.lblFinale);
@@ -720,6 +732,7 @@
         private System.Windows.Forms.Label lblFinale;
         private System.Windows.Forms.ListBox listBoxFinalesSpiel;
         private System.Windows.Forms.Button btnGewinner;
+        private System.Windows.Forms.Button btnBeenden;
     }
 }
 
