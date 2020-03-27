@@ -30,6 +30,10 @@ namespace MarioKartRechner
                 alleSpieler.Add(listBoxSchueler.Items[i].ToString());
                 nichtAusgewaehlteSpieler.Add(listBoxSchueler.Items[i].ToString());
             }
+            //Label Text zurücksetzen
+            lblErsterPlatz.Text = "";
+            lblZweiterPlatz.Text = "";
+            lblDritterPlatz.Text = "";
         }
 
         //Schaltflächemethoden
@@ -69,16 +73,6 @@ namespace MarioKartRechner
             spielerZuSpiel(listBoxSpiel_6);
         }
 
-        private void btnSpiel_7_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_7);
-        }
-
-        private void btnSpiel_8_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_8);
-        }
-
         private void btnZuruecksetzen_Click(object sender, EventArgs e)
         {
             zuruecksetzen();
@@ -102,22 +96,24 @@ namespace MarioKartRechner
             spielerZuRunde(listBoxSpiel_6, listBoxViertelFinaleSpiel_3);
         }
 
-        private void btnViertelFinale_4_Click(object sender, EventArgs e)
-        {
-            spielerZuRunde(listBoxSpiel_7, listBoxViertelFinaleSpiel_4);
-            spielerZuRunde(listBoxSpiel_8, listBoxViertelFinaleSpiel_4);
-        }
-
         private void btnHalbfinale_1_Click(object sender, EventArgs e)
         {
             spielerZuRunde(listBoxViertelFinaleSpiel_1, listBoxHalbfinaleSpiel_1);
-            spielerZuRunde(listBoxViertelFinaleSpiel_2, listBoxHalbfinaleSpiel_1);
         }
 
         private void btnHalbfinale_2_Click(object sender, EventArgs e)
         {
+            spielerZuRunde(listBoxViertelFinaleSpiel_2, listBoxHalbfinaleSpiel_1);
+        }
+
+        private void btnHalbfinale_3_Click(object sender, EventArgs e)
+        {
+            spielerZuRunde(listBoxViertelFinaleSpiel_2, listBoxHalbfinaleSpiel_2);
+        }
+
+        private void btnHalbfinale_4_Click(object sender, EventArgs e)
+        {
             spielerZuRunde(listBoxViertelFinaleSpiel_3, listBoxHalbfinaleSpiel_2);
-            spielerZuRunde(listBoxViertelFinaleSpiel_4, listBoxHalbfinaleSpiel_2);
         }
 
         private void btnFinale_Click(object sender, EventArgs e)
@@ -126,33 +122,96 @@ namespace MarioKartRechner
             spielerZuRunde(listBoxHalbfinaleSpiel_2, listBoxFinalesSpiel);
         }
 
-        private void btnGewinner_Click(object sender, EventArgs e)
+        private void btnErsterPlatz_Click(object sender, EventArgs e)
         {
             //Lokale Variablen
-            string  ausgabe = "";
-
+            string ausgewaehlterSpieler = "";
             //Eingabe
-            if (listBoxFinalesSpiel.SelectedItem != null) //Wenn ein Spieler ausgewählt ist wird dieser als gewinner gesetzt
-                ausgabe = "Der Gewinner ist: " + listBoxFinalesSpiel.SelectedItem.ToString();
+            if (listBoxFinalesSpiel.SelectedItem != null)
+                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
             else
             {
-                ausgabe = "Kein Spieler Selektiert!"; //Fehlermeldung
-                return; //Nichts weiter machen; zurückgehen
+                MessageBox.Show("Bitte wähle den 1. Platz aus!", "Fehler");
+                return;
             }
-
+                
             //Ausgabe
-            MessageBox.Show(ausgabe); //Ausgabe des Gewinners bzw. des Fehlers
-
+            lblErsterPlatz.Text = ausgewaehlterSpieler;
         }
-        
+
+        private void btnZweiterPlatz_Click(object sender, EventArgs e)
+        {
+            //Lokale Variablen
+            string ausgewaehlterSpieler = "";
+            //Eingabe
+            if (listBoxFinalesSpiel.SelectedItem != null)
+                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
+            else
+            {
+                MessageBox.Show("Bitte wähle den 2. Platz aus!", "Fehler");
+                return;
+            }
+            //Ausgabe
+            lblZweiterPlatz.Text = ausgewaehlterSpieler;
+        }
+
+        private void btnDritterPlatz_Click(object sender, EventArgs e)
+        {
+            //Lokale Variablen
+            string ausgewaehlterSpieler = "";
+            //Eingabe
+            if (listBoxFinalesSpiel.SelectedItem != null)
+                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
+            else
+            {
+                MessageBox.Show("Bitte wähle den 3. Platz aus!", "Fehler");
+                return;
+            }
+            //Ausgabe
+            lblDritterPlatz.Text = ausgewaehlterSpieler;
+        }
+
+        //Tastatur Schaltflächenmethoden zum Entfernen ausgewählter Spieler 
+        private void listBoxViertelFinaleSpiel_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxViertelFinaleSpiel_1, e);
+        }
+
+        private void listBoxViertelFinaleSpiel_2_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxViertelFinaleSpiel_2, e);
+        }
+
+        private void listBoxViertelFinaleSpiel_3_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxViertelFinaleSpiel_3, e);
+        }
+
+        private void listBoxHalbfinaleSpiel_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxHalbfinaleSpiel_1, e);
+        }
+
+        private void listBoxHalbfinaleSpiel_2_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxHalbfinaleSpiel_2, e);
+        }
+
+        private void listBoxFinalesSpiel_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxFinalesSpiel, e);
+        }
+
+        //Methoden
         private void btnZufall_Click(object sender, EventArgs e)
         {
             //Alles zurücksetzen
             zuruecksetzen();
 
             //Lokale Variablen
+            int spieleAnzahl = 6;
             List<string> uebrigeSpieler = new List<string>(alleSpieler);
-            string[,] nameZuSpiel = new string[8, 3]; //Liste mit Anzahl der Spiele in 1. Dimenson und anzahl der Spieler in 2. Dimension
+            string[,] nameZuSpiel = new string[spieleAnzahl, uebrigeSpieler.Count / spieleAnzahl]; //Liste mit Anzahl der Spiele in 1. Dimenson und anzahl der Spieler in 2. Dimension
             Random zufall = new Random();
 
             //Verarbeitung
@@ -178,8 +237,6 @@ namespace MarioKartRechner
                 listBoxSpiel_4.Items.Add(nameZuSpiel[3, i]);
                 listBoxSpiel_5.Items.Add(nameZuSpiel[4, i]);
                 listBoxSpiel_6.Items.Add(nameZuSpiel[5, i]);
-                listBoxSpiel_7.Items.Add(nameZuSpiel[6, i]);
-                listBoxSpiel_8.Items.Add(nameZuSpiel[7, i]);
             }
         }
 
@@ -193,7 +250,7 @@ namespace MarioKartRechner
             string[] ausgewaehlterSchueler = new string[1];
 
             //Verarbeitung
-            if(listBoxZiel.Items.Count != 0) //Abfrage ob das listboxZiel Leer ist
+            if (listBoxZiel.Items.Count != 0) //Abfrage ob das listboxZiel Leer ist
             {
                 foreach (string name in listBoxZiel.Items) //Hinzufügen der alten Namen aus dem Listboxziel zu den nichtausgewählten Schülern
                     nichtAusgewaehlteSpieler.Add(name);
@@ -224,9 +281,16 @@ namespace MarioKartRechner
                 return;
 
             foreach (int i in listBoxStart.SelectedIndices) //Alle ausgewählten Spieler werden durchgegangen
-                listBoxZiel.Items.Add(listBoxStart.Items[i]); //Name des ausgewählten Schülers zum Ziel hinzufügen
-
-            listBoxStart.ClearSelected(); //Auswahl wird zurückgesetzt
+            {
+                string spieler = listBoxStart.Items[i].ToString(); //Spielernamen definieren
+                if (listBoxZiel.Items.Contains(spieler)) //Überprüft ob Spieler beriets im Spiel ist
+                {
+                    listBoxStart.ClearSelected(); //Auswahl wird zurückgesetzt
+                    MessageBox.Show("Der Spieler " + spieler + " ist bereichts in diesem Spiel!", "Fehler!");
+                    return;
+                }
+                listBoxZiel.Items.Add(spieler); //Name des ausgewählten Schülers zum Ziel hinzufügen
+            }
 
         }
 
@@ -246,14 +310,11 @@ namespace MarioKartRechner
             listBoxSpiel_4.Items.Clear();
             listBoxSpiel_5.Items.Clear();
             listBoxSpiel_6.Items.Clear();
-            listBoxSpiel_7.Items.Clear();
-            listBoxSpiel_8.Items.Clear();
 
             //Viertelfinale Löschen
             listBoxViertelFinaleSpiel_1.Items.Clear();
             listBoxViertelFinaleSpiel_2.Items.Clear();
             listBoxViertelFinaleSpiel_3.Items.Clear();
-            listBoxViertelFinaleSpiel_4.Items.Clear();
 
             //Halbfinale Löschen
             listBoxHalbfinaleSpiel_1.Items.Clear();
@@ -261,6 +322,21 @@ namespace MarioKartRechner
 
             //Finale Löschen
             listBoxFinalesSpiel.Items.Clear();
+        }
+
+        private void spielerEntfernen(ListBox listbox, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)Keys.Delete || e.KeyValue == (char)Keys.Back) //Überprüft Gedrückte Taste
+            {
+                if (listbox.SelectedIndices.Count != 0) //Abfrage ob Spieler ausgewählt sind
+                {
+                    //Solange bis der Index 0 ist werden alle ausgewählten Indices gelöscht
+                    while (listbox.SelectedItems.Count != 0)
+                    {
+                        listbox.Items.Remove(listbox.SelectedItems[0]);
+                    }
+                }
+            }
         }
     }
 }
