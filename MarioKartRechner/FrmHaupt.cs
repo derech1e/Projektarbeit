@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace MarioKartRechner
 {
-    public partial class FrmHaupt : Form
+    public partial class frmHaupt : Form
     {
         //Globale Variablen
         private List<string> alleSpieler = new List<string>();
         private List<string> nichtAusgewaehlteSpieler = new List<string>();
 
-        public FrmHaupt()
+        public frmHaupt()
         {
             InitializeComponent();
         }
 
         //Laden der Form
-        private void FrmHaupt_Load(object sender, EventArgs e)
+        private void frmHaupt_Load(object sender, EventArgs e)
         {
             //Spielernamen in List hinzufügen
             for (int i = 0; i < listBoxSchueler.Items.Count; i++)

@@ -1,6 +1,6 @@
 ﻿namespace MarioKartRechner
 {
-    partial class FrmHaupt
+    partial class frmHaupt
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -68,10 +68,10 @@
             this.lblErsterPlatz = new System.Windows.Forms.Label();
             this.btnErsterPlatz = new System.Windows.Forms.Button();
             this.groupBoxSieger = new System.Windows.Forms.GroupBox();
-            this.btnZweiterPlatz = new System.Windows.Forms.Button();
-            this.lblZweiterPlatz = new System.Windows.Forms.Label();
             this.btnDritterPlatz = new System.Windows.Forms.Button();
             this.lblDritterPlatz = new System.Windows.Forms.Label();
+            this.btnZweiterPlatz = new System.Windows.Forms.Button();
+            this.lblZweiterPlatz = new System.Windows.Forms.Label();
             this.groupBoxSieger.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +108,7 @@
             this.listBoxSchueler.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxSchueler.Name = "listBoxSchueler";
             this.listBoxSchueler.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxSchueler.Size = new System.Drawing.Size(173, 404);
+            this.listBoxSchueler.Size = new System.Drawing.Size(173, 388);
             this.listBoxSchueler.TabIndex = 0;
             // 
             // lblSchueler
@@ -236,18 +236,19 @@
             // 
             // btnZuruecksetzen
             // 
-            this.btnZuruecksetzen.ForeColor = System.Drawing.Color.Red;
-            this.btnZuruecksetzen.Location = new System.Drawing.Point(12, 482);
+            this.btnZuruecksetzen.BackColor = System.Drawing.Color.Red;
+            this.btnZuruecksetzen.ForeColor = System.Drawing.Color.Black;
+            this.btnZuruecksetzen.Location = new System.Drawing.Point(12, 472);
             this.btnZuruecksetzen.Name = "btnZuruecksetzen";
             this.btnZuruecksetzen.Size = new System.Drawing.Size(172, 33);
             this.btnZuruecksetzen.TabIndex = 28;
             this.btnZuruecksetzen.Text = "Zurücksetzen";
-            this.btnZuruecksetzen.UseVisualStyleBackColor = true;
+            this.btnZuruecksetzen.UseVisualStyleBackColor = false;
             this.btnZuruecksetzen.Click += new System.EventHandler(this.btnZuruecksetzen_Click);
             // 
             // btnZufall
             // 
-            this.btnZufall.Location = new System.Drawing.Point(12, 439);
+            this.btnZufall.Location = new System.Drawing.Point(12, 429);
             this.btnZufall.Name = "btnZufall";
             this.btnZufall.Size = new System.Drawing.Size(172, 37);
             this.btnZufall.TabIndex = 29;
@@ -407,7 +408,7 @@
             // 
             // btnFinale
             // 
-            this.btnFinale.Location = new System.Drawing.Point(542, 389);
+            this.btnFinale.Location = new System.Drawing.Point(542, 383);
             this.btnFinale.Name = "btnFinale";
             this.btnFinale.Size = new System.Drawing.Size(296, 33);
             this.btnFinale.TabIndex = 52;
@@ -418,7 +419,7 @@
             // lblFinale
             // 
             this.lblFinale.AutoSize = true;
-            this.lblFinale.Location = new System.Drawing.Point(625, 439);
+            this.lblFinale.Location = new System.Drawing.Point(625, 429);
             this.lblFinale.Name = "lblFinale";
             this.lblFinale.Size = new System.Drawing.Size(89, 16);
             this.lblFinale.TabIndex = 51;
@@ -428,7 +429,7 @@
             // 
             this.listBoxFinalesSpiel.FormattingEnabled = true;
             this.listBoxFinalesSpiel.ItemHeight = 16;
-            this.listBoxFinalesSpiel.Location = new System.Drawing.Point(627, 461);
+            this.listBoxFinalesSpiel.Location = new System.Drawing.Point(627, 451);
             this.listBoxFinalesSpiel.Name = "listBoxFinalesSpiel";
             this.listBoxFinalesSpiel.Size = new System.Drawing.Size(145, 68);
             this.listBoxFinalesSpiel.TabIndex = 50;
@@ -436,7 +437,7 @@
             // 
             // btnBeenden
             // 
-            this.btnBeenden.Location = new System.Drawing.Point(12, 520);
+            this.btnBeenden.Location = new System.Drawing.Point(12, 510);
             this.btnBeenden.Name = "btnBeenden";
             this.btnBeenden.Size = new System.Drawing.Size(172, 37);
             this.btnBeenden.TabIndex = 55;
@@ -491,31 +492,12 @@
             this.groupBoxSieger.Controls.Add(this.lblZweiterPlatz);
             this.groupBoxSieger.Controls.Add(this.btnErsterPlatz);
             this.groupBoxSieger.Controls.Add(this.lblErsterPlatz);
-            this.groupBoxSieger.Location = new System.Drawing.Point(334, 554);
+            this.groupBoxSieger.Location = new System.Drawing.Point(334, 535);
             this.groupBoxSieger.Name = "groupBoxSieger";
             this.groupBoxSieger.Size = new System.Drawing.Size(679, 88);
             this.groupBoxSieger.TabIndex = 60;
             this.groupBoxSieger.TabStop = false;
             this.groupBoxSieger.Text = "Gewinner bestimmung";
-            // 
-            // btnZweiterPlatz
-            // 
-            this.btnZweiterPlatz.Location = new System.Drawing.Point(228, 35);
-            this.btnZweiterPlatz.Name = "btnZweiterPlatz";
-            this.btnZweiterPlatz.Size = new System.Drawing.Size(78, 35);
-            this.btnZweiterPlatz.TabIndex = 61;
-            this.btnZweiterPlatz.Text = "2. Platz";
-            this.btnZweiterPlatz.UseVisualStyleBackColor = true;
-            this.btnZweiterPlatz.Click += new System.EventHandler(this.btnZweiterPlatz_Click);
-            // 
-            // lblZweiterPlatz
-            // 
-            this.lblZweiterPlatz.AutoSize = true;
-            this.lblZweiterPlatz.Location = new System.Drawing.Point(312, 44);
-            this.lblZweiterPlatz.Name = "lblZweiterPlatz";
-            this.lblZweiterPlatz.Size = new System.Drawing.Size(55, 16);
-            this.lblZweiterPlatz.TabIndex = 60;
-            this.lblZweiterPlatz.Text = "[2.Platz]";
             // 
             // btnDritterPlatz
             // 
@@ -536,11 +518,30 @@
             this.lblDritterPlatz.TabIndex = 62;
             this.lblDritterPlatz.Text = "[3.Platz]";
             // 
-            // FrmHaupt
+            // btnZweiterPlatz
+            // 
+            this.btnZweiterPlatz.Location = new System.Drawing.Point(228, 35);
+            this.btnZweiterPlatz.Name = "btnZweiterPlatz";
+            this.btnZweiterPlatz.Size = new System.Drawing.Size(78, 35);
+            this.btnZweiterPlatz.TabIndex = 61;
+            this.btnZweiterPlatz.Text = "2. Platz";
+            this.btnZweiterPlatz.UseVisualStyleBackColor = true;
+            this.btnZweiterPlatz.Click += new System.EventHandler(this.btnZweiterPlatz_Click);
+            // 
+            // lblZweiterPlatz
+            // 
+            this.lblZweiterPlatz.AutoSize = true;
+            this.lblZweiterPlatz.Location = new System.Drawing.Point(312, 44);
+            this.lblZweiterPlatz.Name = "lblZweiterPlatz";
+            this.lblZweiterPlatz.Size = new System.Drawing.Size(55, 16);
+            this.lblZweiterPlatz.TabIndex = 60;
+            this.lblZweiterPlatz.Text = "[2.Platz]";
+            // 
+            // frmHaupt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 654);
+            this.ClientSize = new System.Drawing.Size(1187, 635);
             this.Controls.Add(this.groupBoxSieger);
             this.Controls.Add(this.btnHalbfinale_3);
             this.Controls.Add(this.btnHalbfinale_2);
@@ -581,9 +582,9 @@
             this.Controls.Add(this.listBoxSchueler);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FrmHaupt";
+            this.Name = "frmHaupt";
             this.Text = "Mario Kart Rechner";
-            this.Load += new System.EventHandler(this.FrmHaupt_Load);
+            this.Load += new System.EventHandler(this.frmHaupt_Load);
             this.groupBoxSieger.ResumeLayout(false);
             this.groupBoxSieger.PerformLayout();
             this.ResumeLayout(false);

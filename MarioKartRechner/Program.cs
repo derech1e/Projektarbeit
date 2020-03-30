@@ -16,7 +16,7 @@ namespace MarioKartRechner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmHaupt());
+            Application.Run(new frmHaupt());
         }
     }
 }
