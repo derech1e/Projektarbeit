@@ -126,15 +126,18 @@ namespace MarioKartRechner
         {
             //Lokale Variablen
             string ausgewaehlterSpieler = "";
+            lblErsterPlatz.Text = "";
             //Eingabe
             if (listBoxFinalesSpiel.SelectedItem != null)
+            {
                 ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
+            }
             else
             {
                 MessageBox.Show("Bitte wähle den 1. Platz aus!", "Fehler");
                 return;
             }
-                
+
             //Ausgabe
             lblErsterPlatz.Text = ausgewaehlterSpieler;
         }
@@ -202,15 +205,18 @@ namespace MarioKartRechner
             spielerEntfernen(listBoxFinalesSpiel, e);
         }
 
+        private void listBoxSchueler_KeyDown(object sender, KeyEventArgs e)
+        {
+            spielerEntfernen(listBoxSchueler, e);
+        }
+
         //Methoden
         private void btnZufall_Click(object sender, EventArgs e)
         {
-            //Alles zurücksetzen
-            zuruecksetzen();
-
             //Lokale Variablen
             int spieleAnzahl = 6;
-            List<string> uebrigeSpieler = new List<string>(alleSpieler);
+            
+            List<string> uebrigeSpieler = new List<string>(listBoxSchueler.Items.Cast<string>().ToArray());
             string[,] nameZuSpiel = new string[spieleAnzahl, uebrigeSpieler.Count / spieleAnzahl]; //Liste mit Anzahl der Spiele in 1. Dimenson und anzahl der Spieler in 2. Dimension
             Random zufall = new Random();
 
@@ -337,6 +343,14 @@ namespace MarioKartRechner
                     }
                 }
             }
+        }
+
+        private bool checkDoppelterPlatz(string name)
+        {
+            string ersterPlatz = lblErsterPlatz.Text;
+            string zweiterPlatz = lblZweiterPlatz.Text;
+            string dritterPlatz = lblDritterPlatz.Text;
+            return name == ersterPlatz || name == zweiterPlatz || name == dritterPlatz;
         }
     }
 }

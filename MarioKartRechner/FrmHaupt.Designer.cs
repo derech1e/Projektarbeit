@@ -110,6 +110,7 @@
             this.listBoxSchueler.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxSchueler.Size = new System.Drawing.Size(173, 388);
             this.listBoxSchueler.TabIndex = 0;
+            this.listBoxSchueler.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxSchueler_KeyDown);
             // 
             // lblSchueler
             // 
@@ -240,7 +241,7 @@
             this.btnZuruecksetzen.ForeColor = System.Drawing.Color.Black;
             this.btnZuruecksetzen.Location = new System.Drawing.Point(12, 472);
             this.btnZuruecksetzen.Name = "btnZuruecksetzen";
-            this.btnZuruecksetzen.Size = new System.Drawing.Size(172, 33);
+            this.btnZuruecksetzen.Size = new System.Drawing.Size(172, 38);
             this.btnZuruecksetzen.TabIndex = 28;
             this.btnZuruecksetzen.Text = "Zurücksetzen";
             this.btnZuruecksetzen.UseVisualStyleBackColor = false;
@@ -437,7 +438,7 @@
             // 
             // btnBeenden
             // 
-            this.btnBeenden.Location = new System.Drawing.Point(12, 510);
+            this.btnBeenden.Location = new System.Drawing.Point(12, 516);
             this.btnBeenden.Name = "btnBeenden";
             this.btnBeenden.Size = new System.Drawing.Size(172, 37);
             this.btnBeenden.TabIndex = 55;
