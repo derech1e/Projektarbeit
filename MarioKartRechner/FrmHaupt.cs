@@ -42,37 +42,6 @@ namespace MarioKartRechner
             Close();
         }
 
-        private void btnSpiel_1_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_1);
-        }
-
-        private void btnSpiel_2_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_2);
-
-        }
-
-        private void btnSpiel_3_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_3);
-        }
-
-        private void btnSpiel_4_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_4);
-        }
-
-        private void btnSpiel_5_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_5);
-        }
-
-        private void btnSpiel_6_Click(object sender, EventArgs e)
-        {
-            spielerZuSpiel(listBoxSpiel_6);
-        }
-
         private void btnZuruecksetzen_Click(object sender, EventArgs e)
         {
             zuruecksetzen();
@@ -124,54 +93,26 @@ namespace MarioKartRechner
 
         private void btnErsterPlatz_Click(object sender, EventArgs e)
         {
-            //Lokale Variablen
-            string ausgewaehlterSpieler = "";
-            lblErsterPlatz.Text = "";
-            //Eingabe
-            if (listBoxFinalesSpiel.SelectedItem != null)
-            {
-                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
-            }
-            else
-            {
-                MessageBox.Show("Bitte wähle den 1. Platz aus!", "Fehler");
-                return;
-            }
-
+            string spieler = platzierterSpieler(lblErsterPlatz);
             //Ausgabe
-            lblErsterPlatz.Text = ausgewaehlterSpieler;
+            if (spieler != "")
+                lblErsterPlatz.Text = spieler;
         }
 
         private void btnZweiterPlatz_Click(object sender, EventArgs e)
         {
-            //Lokale Variablen
-            string ausgewaehlterSpieler = "";
-            //Eingabe
-            if (listBoxFinalesSpiel.SelectedItem != null)
-                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
-            else
-            {
-                MessageBox.Show("Bitte wähle den 2. Platz aus!", "Fehler");
-                return;
-            }
+            string spieler = platzierterSpieler(lblZweiterPlatz);
             //Ausgabe
-            lblZweiterPlatz.Text = ausgewaehlterSpieler;
+            if (spieler != "")
+                lblZweiterPlatz.Text = spieler;
         }
 
         private void btnDritterPlatz_Click(object sender, EventArgs e)
         {
-            //Lokale Variablen
-            string ausgewaehlterSpieler = "";
-            //Eingabe
-            if (listBoxFinalesSpiel.SelectedItem != null)
-                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
-            else
-            {
-                MessageBox.Show("Bitte wähle den 3. Platz aus!", "Fehler");
-                return;
-            }
+            string spieler = platzierterSpieler(lblDritterPlatz);
             //Ausgabe
-            lblDritterPlatz.Text = ausgewaehlterSpieler;
+            if (spieler != "")
+                lblDritterPlatz.Text = spieler;
         }
 
         //Tastatur Schaltflächenmethoden zum Entfernen ausgewählter Spieler 
@@ -213,72 +154,108 @@ namespace MarioKartRechner
         //Methoden
         private void btnZufall_Click(object sender, EventArgs e)
         {
-            //Lokale Variablen
-            int spieleAnzahl = 6;
-            
-            List<string> uebrigeSpieler = new List<string>(listBoxSchueler.Items.Cast<string>().ToArray());
-            string[,] nameZuSpiel = new string[spieleAnzahl, uebrigeSpieler.Count / spieleAnzahl]; //Liste mit Anzahl der Spiele in 1. Dimenson und anzahl der Spieler in 2. Dimension
-            Random zufall = new Random();
 
-            //Verarbeitung
-            for (int spiel = 0; spiel <= nameZuSpiel.GetUpperBound(0); spiel++) //Alle Felder der 1(0). Dimension durchgehen
+            string[] spielerListe = new string[listBoxSchueler.Items.Count];
+
+            for (int i = 0; i < spielerListe.Length; i++)
             {
-                for (int spieler = 0; spieler <= nameZuSpiel.GetUpperBound(1); spieler++) //Alle Felder der 2(1). Dimension durchgehen
+                string name = listBoxSchueler.Items[new Random().Next(listBoxSchueler.Items.Count)].ToString();
+                while (spielerListe.Contains(name))
                 {
-                    string name = uebrigeSpieler[zufall.Next(0, uebrigeSpieler.Count)]; //Zufälliger name
-                    nameZuSpiel[spiel, spieler] = name; //Name zu Spiel hinzufügen
-                    uebrigeSpieler.Remove(name); //Name aus übrigen Spielern entfernen
+                    name = listBoxSchueler.Items[new Random().Next(listBoxSchueler.Items.Count)].ToString();
+                }
+                spielerListe[i] = name;
+            }
 
+
+
+            //Lokale Variablen
+            double spiele = 6;
+            double spieler = listBoxSchueler.Items.Count;
+            int rest = (int)(spieler % spiele);
+
+            string[][] nameZuSpiel = new string[(int)spiele][]; //Liste mit Anzahl der Spiele in 1. Dimenson und anzahl der Spieler in 2. Dimension
+
+            
+            for(int i = 0; i < spiele; i++)
+            {
+                int größe = (int)Math.Ceiling(spieler / spiele);
+                //if (rest == 0)
+                //{
+                //    nameZuSpiel[i] = new string[größe];
+                //}
+                //else
+                //{
+                    if (i >= rest)
+                    {
+                        größe--;
+                    }
+                    nameZuSpiel[i] = new string[größe];
+                //}
+                Console.WriteLine("Key: " + i.ToString() + " Größe: " + größe.ToString());
+            }
+            int zähler = 0;
+
+            for (int i = 0; i < nameZuSpiel.Length; i++)
+            {
+                for(int k = 0; k < nameZuSpiel[i].Length; k++)
+                {
+                    nameZuSpiel[i][k] = spielerListe[zähler];
+                    zähler++;
                 }
             }
 
+            //Random zufall = new Random();
+
+            ////Verarbeitung
+            //for (int spiel = 0; spiel <= nameZuSpiel.GetUpperBound(0); spiel++) //Alle Felder der 1(0). Dimension durchgehen
+            //{
+            //    for (int spieler = 0; spieler <= nameZuSpiel.GetUpperBound(1); spieler++) //Alle Felder der 2(1). Dimension durchgehen
+            //    {
+            //        string name = uebrigeSpieler[zufall.Next(0, uebrigeSpieler.Count)]; //Zufälliger name
+            //        nameZuSpiel[spiel, spieler] = name; //Name zu Spiel hinzufügen
+            //        uebrigeSpieler.Remove(name); //Name aus übrigen Spielern entfernen
+
+            //    }
+            //}
+
             //Ausgabe
             listBoxSchueler.Items.Clear();
-            for (int i = 0; i < nameZuSpiel.GetUpperBound(1) + 1; i++) //Alle Felder der 2(1). Dimension durchgehen
+
+            foreach(string[] name in nameZuSpiel)
             {
-                //Spieler in Spiele(Listboxen) hinzufügen
-                listBoxSpiel_1.Items.Add(nameZuSpiel[0, i]);
-                listBoxSpiel_2.Items.Add(nameZuSpiel[1, i]);
-                listBoxSpiel_3.Items.Add(nameZuSpiel[2, i]);
-                listBoxSpiel_4.Items.Add(nameZuSpiel[3, i]);
-                listBoxSpiel_5.Items.Add(nameZuSpiel[4, i]);
-                listBoxSpiel_6.Items.Add(nameZuSpiel[5, i]);
+                foreach(string test in name)
+                {
+                    print(test);
+                }
             }
+
+            for(int i = 0; i < nameZuSpiel.Length; i++)
+            {
+                print("----------------------------");
+                for(int k = 0; k < nameZuSpiel[i].Length; k++)
+                {
+                    print(nameZuSpiel[i][k] + " I: " + i + " K: " + k);
+                }
+            }
+
+
+            //for (int i = 0; i < nameZuSpiel.GetUpperBound(0); i++) //Alle Felder der 2(1). Dimension durchgehen
+                //for(int )
+            //{
+            //    //Spieler in Spiele(Listboxen) hinzufügen
+            //    listBoxSpiel_1.Items.Add(nameZuSpiel[0][i]);
+            //    listBoxSpiel_1.Items.Add(nameZuSpiel[1][i]);
+            //    listBoxSpiel_1.Items.Add(nameZuSpiel[2][i]);
+            //    listBoxSpiel_1.Items.Add(nameZuSpiel[3][i]);
+            //    listBoxSpiel_1.Items.Add(nameZuSpiel[4][i]);
+            //    listBoxSpiel_1.Items.Add(nameZuSpiel[5][i]);
+            
         }
 
-        //Methoden
-        private void spielerZuSpiel(ListBox listBoxZiel)
+        private void print(object message)
         {
-            if (listBoxSchueler.SelectedIndices.Count == 0) //Abfrage ob Spieler ausgewählt sind
-                return;
-
-            //Lokale Variablen
-            string[] ausgewaehlterSchueler = new string[1];
-
-            //Verarbeitung
-            if (listBoxZiel.Items.Count != 0) //Abfrage ob das listboxZiel Leer ist
-            {
-                foreach (string name in listBoxZiel.Items) //Hinzufügen der alten Namen aus dem Listboxziel zu den nichtausgewählten Schülern
-                    nichtAusgewaehlteSpieler.Add(name);
-            }
-
-            listBoxZiel.Items.Clear(); //Ziel-Listbox alle Items entfernen
-            Array.Resize(ref ausgewaehlterSchueler, listBoxSchueler.SelectedIndices.Count); //Anpassen der Liste auf Selektierte Spieler
-
-            foreach (int i in listBoxSchueler.SelectedIndices) //Alle ausgewählten Spieler werden durchgegangen
-            {
-                string name = listBoxSchueler.Items[i].ToString(); //Name des ausgewählten Spieler
-                ausgewaehlterSchueler[i] = name; //Name zu ausgewälte Schüler hinzufügen
-                nichtAusgewaehlteSpieler.Remove(name); //Name aus auszuwählender Schülerliste entfernen
-            }
-
-            //Ausgabe
-            foreach (string name in ausgewaehlterSchueler) //Ausgewählten Schüler zum listboxZiel hinzufügen
-                listBoxZiel.Items.Add(name);
-
-            listBoxSchueler.Items.Clear();
-            foreach (string name in nichtAusgewaehlteSpieler) //Auszuwählende Schüler aktualisieren
-                listBoxSchueler.Items.Add(name);
+            Console.WriteLine(message);
         }
 
         private void spielerZuRunde(ListBox listBoxStart, ListBox listBoxZiel)
@@ -297,6 +274,7 @@ namespace MarioKartRechner
                 }
                 listBoxZiel.Items.Add(spieler); //Name des ausgewählten Schülers zum Ziel hinzufügen
             }
+            listBoxStart.ClearSelected(); //Auswahl wird zurückgesetzt
 
         }
 
@@ -345,12 +323,35 @@ namespace MarioKartRechner
             }
         }
 
-        private bool checkDoppelterPlatz(string name)
+        private string platzierterSpieler(Label label)
         {
-            string ersterPlatz = lblErsterPlatz.Text;
-            string zweiterPlatz = lblZweiterPlatz.Text;
-            string dritterPlatz = lblDritterPlatz.Text;
-            return name == ersterPlatz || name == zweiterPlatz || name == dritterPlatz;
+            //Lokale Variablen
+            string ausgewaehlterSpieler = "";
+            //Eingabe
+            if (listBoxFinalesSpiel.SelectedItem != null)
+                ausgewaehlterSpieler = listBoxFinalesSpiel.SelectedItem.ToString();
+            else
+            {
+                MessageBox.Show("Bitte wähle den Platzierten Spieler aus!", "Fehler");
+                return "";
+            }
+
+            listBoxFinalesSpiel.ClearSelected();
+
+            if (checkObSpielerPlatziert(ausgewaehlterSpieler, label))
+            {
+                MessageBox.Show("Dieser Spieler hat bereits einen anderen Platz!", "Fehler");
+                return "";
+            }
+
+            //Rückgabe
+            return ausgewaehlterSpieler;
         }
+
+        private bool checkObSpielerPlatziert(String name, Label lblZiel)
+        {
+            return (name == lblErsterPlatz.Text && lblErsterPlatz != lblZiel) || (name == lblZweiterPlatz.Text && lblZweiterPlatz != lblZiel) || (name == lblDritterPlatz.Text && lblDritterPlatz != lblZiel);
+        }
+
     }
 }
