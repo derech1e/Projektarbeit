@@ -27,4 +27,3 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: published_webapp
-        path: Projektarbeit\MarioKartRechner\bin\Release
