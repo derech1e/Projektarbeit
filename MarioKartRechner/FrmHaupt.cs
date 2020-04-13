@@ -15,6 +15,7 @@ namespace MarioKartRechner
         //Globale Variablen
         private List<string> alleSpieler = new List<string>();
         private List<string> nichtAusgewaehlteSpieler = new List<string>();
+        private Random random = new Random();
 
         public frmHaupt()
         {
@@ -151,111 +152,97 @@ namespace MarioKartRechner
             spielerEntfernen(listBoxSchueler, e);
         }
 
-        //Methoden
         private void btnZufall_Click(object sender, EventArgs e)
         {
-
-            string[] spielerListe = new string[listBoxSchueler.Items.Count];
-
-            for (int i = 0; i < spielerListe.Length; i++)
-            {
-                string name = listBoxSchueler.Items[new Random().Next(listBoxSchueler.Items.Count)].ToString();
-                while (spielerListe.Contains(name))
-                {
-                    name = listBoxSchueler.Items[new Random().Next(listBoxSchueler.Items.Count)].ToString();
-                }
-                spielerListe[i] = name;
-            }
-
-
-
             //Lokale Variablen
-            double spiele = 6;
-            double spieler = listBoxSchueler.Items.Count;
-            int rest = (int)(spieler % spiele);
-
-            string[][] nameZuSpiel = new string[(int)spiele][]; //Liste mit Anzahl der Spiele in 1. Dimenson und anzahl der Spieler in 2. Dimension
-
-            
-            for(int i = 0; i < spiele; i++)
-            {
-                int größe = (int)Math.Ceiling(spieler / spiele);
-                //if (rest == 0)
-                //{
-                //    nameZuSpiel[i] = new string[größe];
-                //}
-                //else
-                //{
-                    if (i >= rest)
-                    {
-                        größe--;
-                    }
-                    nameZuSpiel[i] = new string[größe];
-                //}
-                Console.WriteLine("Key: " + i.ToString() + " Größe: " + größe.ToString());
-            }
+            int spieleAnzahl = 6; //Legt die Anzahl der Spiele fest
+            double spielerAnzahl = listBoxSchueler.Items.Count; //Die gesamte Spieleranzahl im Wettkampf
+            int rest = (int)(spielerAnzahl % spieleAnzahl); //Rest wird für gleichmäßige verteilung benötigt
+            string[][] nameZuSpiel = new string[spieleAnzahl][];
+            string[] spielerListe = zufaelligeSpielerListe();
             int zähler = 0;
+
+            //Verarbeitung
+            for (int i = 0; i < spieleAnzahl; i++) //Geht jedes Spiel durch und berechnet die Größe der Liste für eine gleichmäßige Verteilung
+            {
+                int spielerAnzahlSpiel = (int)Math.Ceiling(spielerAnzahl / spieleAnzahl); //Berechnet die Spieleranzahl pro Spiel, durch aufrunden
+
+                if (rest == 0) //Bei gleichmäßigem Spieler-Spielverhältnis wird die Spielgröße dirket übergeben
+                {
+                    nameZuSpiel[i] = new string[spielerAnzahlSpiel];
+                }
+                else if (i >= rest) //wenn nicht wird anzahl der Spieler, für jedes weiteres Spiel, dass größer oder gleich des Rests ist um eines vermindert 
+                {
+                    spielerAnzahlSpiel--;
+                }
+
+                nameZuSpiel[i] = new string[spielerAnzahlSpiel]; //zuweisung der Spieleranzahlgröße pro Spiel
+            }
 
             for (int i = 0; i < nameZuSpiel.Length; i++)
             {
-                for(int k = 0; k < nameZuSpiel[i].Length; k++)
+                for (int k = 0; k < nameZuSpiel[i].Length; k++)
                 {
-                    nameZuSpiel[i][k] = spielerListe[zähler];
-                    zähler++;
+                    nameZuSpiel[i][k] = spielerListe[zähler]; //Name eines Spielrs wird zum Spiel zugewiesen
+                    zähler++; //Zähler für Spielerlisteneintrag
                 }
             }
-
-            //Random zufall = new Random();
-
-            ////Verarbeitung
-            //for (int spiel = 0; spiel <= nameZuSpiel.GetUpperBound(0); spiel++) //Alle Felder der 1(0). Dimension durchgehen
-            //{
-            //    for (int spieler = 0; spieler <= nameZuSpiel.GetUpperBound(1); spieler++) //Alle Felder der 2(1). Dimension durchgehen
-            //    {
-            //        string name = uebrigeSpieler[zufall.Next(0, uebrigeSpieler.Count)]; //Zufälliger name
-            //        nameZuSpiel[spiel, spieler] = name; //Name zu Spiel hinzufügen
-            //        uebrigeSpieler.Remove(name); //Name aus übrigen Spielern entfernen
-
-            //    }
-            //}
 
             //Ausgabe
             listBoxSchueler.Items.Clear();
 
-            foreach(string[] name in nameZuSpiel)
+            for (int i = 0; i < nameZuSpiel.Length; i++)
             {
-                foreach(string test in name)
+                for (int k = 0; k < nameZuSpiel[i].Length; k++)
                 {
-                    print(test);
+                    //Spieler wird entsprechend dem Fall i zur entsprechenden Listbox zugeordnet
+                    switch (i)
+                    {
+                        case 0:
+                            listBoxSpiel_1.Items.Add(nameZuSpiel[0][k]);
+                            break;
+                        case 1:
+                            listBoxSpiel_2.Items.Add(nameZuSpiel[1][k]);
+                            break;
+                        case 2:
+                            listBoxSpiel_3.Items.Add(nameZuSpiel[2][k]);
+                            break;
+                        case 3:
+                            listBoxSpiel_4.Items.Add(nameZuSpiel[3][k]);
+                            break;
+                        case 4:
+                            listBoxSpiel_5.Items.Add(nameZuSpiel[4][k]);
+                            break;
+                        case 5:
+                            listBoxSpiel_6.Items.Add(nameZuSpiel[5][k]);
+                            break;
+                        default:
+                            MessageBox.Show("Zuweisungsfehler!"); //Bei einem Fehler wird dieses gemeldet
+                            break;
+                    }
                 }
             }
-
-            for(int i = 0; i < nameZuSpiel.Length; i++)
-            {
-                print("----------------------------");
-                for(int k = 0; k < nameZuSpiel[i].Length; k++)
-                {
-                    print(nameZuSpiel[i][k] + " I: " + i + " K: " + k);
-                }
-            }
-
-
-            //for (int i = 0; i < nameZuSpiel.GetUpperBound(0); i++) //Alle Felder der 2(1). Dimension durchgehen
-                //for(int )
-            //{
-            //    //Spieler in Spiele(Listboxen) hinzufügen
-            //    listBoxSpiel_1.Items.Add(nameZuSpiel[0][i]);
-            //    listBoxSpiel_1.Items.Add(nameZuSpiel[1][i]);
-            //    listBoxSpiel_1.Items.Add(nameZuSpiel[2][i]);
-            //    listBoxSpiel_1.Items.Add(nameZuSpiel[3][i]);
-            //    listBoxSpiel_1.Items.Add(nameZuSpiel[4][i]);
-            //    listBoxSpiel_1.Items.Add(nameZuSpiel[5][i]);
-            
         }
 
-        private void print(object message)
+        //Methoden
+        private string[] zufaelligeSpielerListe()
         {
-            Console.WriteLine(message);
+            //Lokale Varbiablen
+            int größe = listBoxSchueler.Items.Count; //Eingabe der Größe
+            string[] spielerListe = new string[größe];
+
+            //Verarbeitung
+            for (int i = 0; i < spielerListe.Length; i++) //Jedes Element der Spielerliste wird einmal durchgegangen
+            {
+                string name = listBoxSchueler.Items[random.Next(größe)].ToString(); //Zufälliges Element aus der Spielerliste
+                while (spielerListe.Contains(name)) //Überprüft ob das Element bereits einmal in der Liste ist
+                {
+                    name = listBoxSchueler.Items[random.Next(größe)].ToString(); //Wenn vorhanden, solange bis ein Neues nicht vorhandenes neues Element gefunden wurde
+                }
+                spielerListe[i] = name; //Übergabe des Elements in die Spielerliste
+            }
+            //Liste wird als Rückgabewert zurückgegeben
+            return spielerListe;
         }
 
         private void spielerZuRunde(ListBox listBoxStart, ListBox listBoxZiel)
@@ -352,6 +339,5 @@ namespace MarioKartRechner
         {
             return (name == lblErsterPlatz.Text && lblErsterPlatz != lblZiel) || (name == lblZweiterPlatz.Text && lblZweiterPlatz != lblZiel) || (name == lblDritterPlatz.Text && lblDritterPlatz != lblZiel);
         }
-
     }
 }
